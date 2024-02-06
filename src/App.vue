@@ -1,11 +1,11 @@
 <script setup>
-
+import PageView from '@/views/PageView'
 </script>
 
 <template>
   <v-layout>
     <v-main>
-      <h1>TEST</h1>
+      <PageView />
     </v-main>
   </v-layout>
 </template>
