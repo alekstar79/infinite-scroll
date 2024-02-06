@@ -9,12 +9,18 @@
     >
       <slot name="spinner" />
     </div>
+    <div
+      v-show="state === 'error'"
+      class="observer--error"
+    >
+      <slot name="error" />
+    </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref, onUnmounted } from 'vue'
-import { startObserver, getParentEl } from '@/utils'
+import { onMounted, onUnmounted, ref, nextTick } from 'vue'
+import { startObserver, getParentEl, isVisible } from '@/utils'
 
 const emit = defineEmits(['infinite'])
 const props = defineProps({
@@ -35,6 +41,9 @@ const props = defineProps({
 const observerNode = ref(null)
 const state = ref('')
 
+/**
+* @type {{observerNode: Ref<UnwrapRef<HTMLElement|null>>, distance: InferPropType<{default: number, type: NumberConstructor}>, top: InferPropType<{default: boolean, type: BooleanConstructor}>, parentEl: null, emit(): void}}
+*/
 const params = {
   observerNode,
   distance: props.distance,
@@ -48,15 +57,24 @@ const params = {
   }
 }
 
+/**
+* @type {{loaded(): void, loading(): void, error(): void}}
+*/
 const stateHandler = {
   loading() {
     state.value = 'loading'
   },
-  loaded() {
+  async loaded() {
     state.value = 'loaded'
+
+    await nextTick()
+
+    if (isVisible(observerNode.value, params.parentEl)) {
+      params.emit()
+    }
   },
   error() {
-    // do something...
+    state.value = 'error'
   }
 }
 

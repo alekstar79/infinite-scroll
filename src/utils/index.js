@@ -1,5 +1,15 @@
 import { nextTick } from 'vue'
 
+function isVisible(el, view = null)
+{
+  const elRect = el.getBoundingClientRect()
+  const viewRect = view?.getBoundingClientRect()
+
+  return viewRect
+    ? elRect.top >= viewRect.top && elRect.bottom <= viewRect.bottom
+    : elRect.top >= 0 && elRect.bottom <= window.innerHeight
+}
+
 async function getParentEl(target)
 {
   await nextTick()
@@ -35,5 +45,6 @@ function startObserver(params)
 
 export {
   startObserver,
-  getParentEl
+  getParentEl,
+  isVisible
 }

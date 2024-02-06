@@ -32,6 +32,10 @@
       <template #spinner>
         <SpinnerComponent />
       </template>
+
+      <template #error>
+        <span>Oops something went wrong</span>
+      </template>
     </ObserverComponent>
   </div>
 </template>
@@ -50,8 +54,8 @@ const list = computed(() => store.state.page.list)
 
 let page = 1
 
-const load = () => {
-  store.dispatch(FETCH_DATA, page++)
+const load = ({ loaded, error }) => {
+  store.dispatch(FETCH_DATA, page++).then(loaded).catch(error)
 }
 </script>
 
