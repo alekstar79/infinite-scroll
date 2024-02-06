@@ -3,5 +3,9 @@
 </script>
 
 <template>
-  <div>TEST</div>
+  <v-layout>
+    <v-main>
+      <h1>TEST</h1>
+    </v-main>
+  </v-layout>
 </template>
