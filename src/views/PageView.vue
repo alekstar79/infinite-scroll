@@ -28,12 +28,17 @@
       </v-card>
     </div>
 
-    <ObserverComponent @infinite="load" />
+    <ObserverComponent @infinite="load">
+      <template #spinner>
+        <SpinnerComponent />
+      </template>
+    </ObserverComponent>
   </div>
 </template>
 
 <script setup>
 import ObserverComponent from '@/components/ObserverComponent'
+import SpinnerComponent from '@/components/SpinnerComponent'
 
 import { FETCH_DATA } from '@/store/store-types'
 

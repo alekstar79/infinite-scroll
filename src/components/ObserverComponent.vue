@@ -2,7 +2,14 @@
   <div
     ref="observerNode"
     class="observer"
-  />
+  >
+    <div
+      v-show="state === 'loading'"
+      class="observer--loading"
+    >
+      <slot name="spinner" />
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -43,7 +50,7 @@ const params = {
 
 const stateHandler = {
   loading() {
-    // do something...
+    state.value = 'loading'
   },
   loaded() {
     state.value = 'loaded'
