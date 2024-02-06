@@ -1,0 +1,41 @@
+:root {
+  --vt-c-white: #ffffff;
+  --vt-c-black: #181818;
+
+  --vt-c-text-light: rgba(44, 62, 80, 1);
+  --vt-c-text-dark: rgba(235, 235, 235, 0.64);
+}
+
+:root {
+  --color-background: var(--vt-c-white);
+  --color-text: var(--vt-c-text-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--vt-c-black);
+    --color-text: var(--vt-c-text-dark);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+
+  line-height: 1.6;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Roboto, Ubuntu, 'Fira Sans', 'Droid Sans', sans-serif;
+  font-size: 15px;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
