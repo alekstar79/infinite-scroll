@@ -13,9 +13,22 @@ export default {
   },
 
   actions: {
-    async [FETCH_DATA]()
+    async [FETCH_DATA]({ commit }, p = 1)
     {
-      //
+      try {
+
+        const response = await fetch(`/api?page=${p}&results=30&seed=abc&inc=name,email,picture&noinfo`, {
+          headers: { 'Content-Type': 'application/json' }
+        })
+
+        if (response.ok) {
+          const { results } = await response.json()
+          commit(ADD_TO_LIST, results)
+        }
+
+      } catch (e) {
+        console.error(e.message)
+      }
     }
   }
 }
