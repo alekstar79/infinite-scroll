@@ -1,5 +1,12 @@
 import { nextTick } from 'vue'
 
+/**
+* @function
+* @description Determines whether an element is in the viewport
+* @param {HTMLElement} el
+* @param {HTMLElement|null} view
+* @returns {boolean}
+*/
 function isVisible(el, view = null)
 {
   const elRect = el.getBoundingClientRect()
@@ -10,6 +17,12 @@ function isVisible(el, view = null)
     : elRect.top >= 0 && elRect.bottom <= window.innerHeight
 }
 
+/**
+* @function
+* @description Gets the parent element for the passed one
+* @param {HTMLElement|string} target
+* @returns {Promise<HTMLElement|null>}
+*/
 async function getParentEl(target)
 {
   await nextTick()
@@ -23,6 +36,12 @@ async function getParentEl(target)
     : null
 }
 
+/**
+* @function
+* @description Creates an observer instance
+* @param {object} params
+* @returns {IntersectionObserver}
+*/
 function startObserver(params)
 {
   const rootMargin = params.top ? `${params.distance}px 0px 0px 0px` : `0px 0px ${params.distance}px 0px`
